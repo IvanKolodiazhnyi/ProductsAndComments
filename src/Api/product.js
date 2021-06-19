@@ -1,4 +1,4 @@
-{"data": [
+const product = [
   {
     "id": 0, 
     "imageUrl": "http://filearchive.cnews.ru/mrtest/images/goods_gallery/204/200204_gal.jpg", 
@@ -126,5 +126,8 @@
       }
     ]
   }
-]
-}
+];
+localStorage.setItem('products', JSON.stringify(product));
+
+const raw = localStorage.getItem('products');
+export const products = JSON.parse(raw);

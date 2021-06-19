@@ -1,0 +1,53 @@
+.container__card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.container__search {
+  margin-bottom: 15px;
+}
+
+.search {
+
+  &__input {
+    padding: 7px;
+    font-size: 15px;
+    border-width: 2px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: ridge;
+    border-radius: 50px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+
+    &:focus {
+      outline:none;
+    }
+  }
+
+  &__button {
+    margin-left: 15px;
+    height: 30px;
+    padding: 7;
+
+    border: 1px solid black;
+    border-radius: 28px;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    transition: text-shadow 0.5s;
+
+    &:hover {
+      text-shadow: 0px 1px 0 black;
+    }
+
+    &:active {
+      position:relative;
+      top:1px;
+    }
+  }
+}
