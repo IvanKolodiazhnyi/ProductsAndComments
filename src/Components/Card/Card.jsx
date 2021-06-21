@@ -14,73 +14,89 @@ export const CardItem = ({
   display,
   id,
   onRemove,
-  comments
+  comments,
+  countStatus,
+  count
 }) => {
   const [visibleDetails, setVisibleDetails] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
   return (
-    <div className="container-items">
-      <div className="card">
-        <img
-          src={imageUrl}
-          alt="Product Foto"
-          className="card__img"
-        />
+    <>
+      {(countStatus || count !== 0) && (
+        <div className={clNames("container-items", {
+          "container-items--noCount": countStatus && count === 0,
+        })}>
+          <div className="card">
+            <img
+              src={imageUrl}
+              alt="Product Foto"
+              className="card__img"
+            />
+    
+            <h2 className="card__title">
+              {name}
+            </h2>
+    
+            <p className="card__text">
+              {snippet}
+            </p>
 
-        <h2 className="card__title">
-          {name}
-        </h2>
+            {count === 0 && (
+              <p className="card__count">
+                Out of stock
+              </p>
+            )}
 
-        <p className="card__text">
-          {snippet}
-        </p>
-
-        <button
-          className={clNames("card__button", {
-            'card__button--isActive': visibleDetails,
-          })}
-          onClick={() => setVisibleDetails(!visibleDetails)}
-        >
+            <button
+              className={clNames("card__button", {
+                'card__button--isActive': visibleDetails,
+              })}
+              onClick={() => setVisibleDetails(!visibleDetails)}
+            >
+              {visibleDetails ? (
+                'Hide details'
+              ) : (
+                'Show some details'
+              )}
+            </button>
+            <button
+              className="delete"
+              onClick={() => onRemove(id)}
+            >
+              Delete
+            </button>
+            <button
+              className="show"
+              onClick={() => setModalActive(true)}
+            >
+              {`Show comments: ${comments.length}`}
+            </button>
+          </div>
+    
           {visibleDetails ? (
-            'Hide details'
+            <ScreenDetails {...display}/>
           ) : (
-            'Show some details'
+            null
           )}
-        </button>
-        <button
-          className="delete"
-          onClick={() => onRemove(id)}
-        >
-          Delete
-        </button>
-        <button
-          className="show"
-          onClick={() => setModalActive(true)}
-        >
-          {`Show comments: ${comments.length}`}
-        </button>
-      </div>
-
-      {visibleDetails ? (
-        <ScreenDetails {...display}/>
-      ) : (
-        null
+    
+          <Modal
+            active={modalActive}
+            setActive={setModalActive}
+          >
+            <Comments comments={comments}/>
+          </Modal>
+        </div>
       )}
-
-      <Modal
-        active={modalActive}
-        setActive={setModalActive}
-      >
-        <Comments comments={comments}/>
-      </Modal>
-    </div>
+    </>
   );
 }
 
 CardItem.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  snippet: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
   display: PropTypes.shape({
     productId: PropTypes.number,
     description: PropTypes.string,
@@ -90,5 +106,6 @@ CardItem.propTypes = {
   id: PropTypes.number.isRequired,
   comments: PropTypes.arrayOf(
     PropTypes.shape({})
-  ).isRequired
+  ).isRequired,
+  countStatus: PropTypes.bool.isRequired,
 }

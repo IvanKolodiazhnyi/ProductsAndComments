@@ -9,13 +9,16 @@
 
   &__input {
     padding: 7px;
-    font-size: 15px;
+    width: 45vw;
+    background-color: #FFFFFF;
+
     border-width: 2px;
     border-color: #CCCCCC;
-    background-color: #FFFFFF;
-    color: #000000;
     border-style: ridge;
     border-radius: 50px;
+
+    font-size: 15px;
+    color: #000000;
 
     &:focus {
       outline:none;

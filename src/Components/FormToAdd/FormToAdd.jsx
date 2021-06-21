@@ -8,11 +8,13 @@ export const FormToAdd = ({ onAdd }) => {
   const [imageUrl, setimageUrl] = useState('');
   const [name, setName] = useState('');
   const [snippet, setSnippet] = useState('');
+  const [count, setCount] = useState('')
 
   const clear = () => {
     setimageUrl('');
     setName('');
     setSnippet('');
+    setCount('');
   };
 
   const handleSumbit = () => {
@@ -20,6 +22,7 @@ export const FormToAdd = ({ onAdd }) => {
       imageUrl,
       name,
       snippet,
+      count: +count,
       id: uuidv4(),
       display: {},
       comments: [],
@@ -41,6 +44,7 @@ export const FormToAdd = ({ onAdd }) => {
       >
       <div className="form__input-wrapper">
         <input
+          type="text"
           className="form__input"
           name="imageUrl"
           value={imageUrl}
@@ -51,6 +55,7 @@ export const FormToAdd = ({ onAdd }) => {
       </div>
       <div className="form__input-wrapper">
         <input
+          type="text"
           className="form__input"
           name="name"
           placeholder="Enter a product name"
@@ -61,12 +66,24 @@ export const FormToAdd = ({ onAdd }) => {
       </div>
       <div className="form__input-wrapper">
         <input
+          type="text"
           className="form__input"
           name="snippet"
           value={snippet}
           onChange={({ target }) => setSnippet(target.value)}
           required
           placeholder="Enter a product description"
+        />
+      </div>
+      <div className="form__input-wrapper">
+        <input
+          className="form__input"
+          type="number"
+          name="count"
+          value={count}
+          onChange={({ target }) => setCount(target.value)}
+          required
+          placeholder="How much in stock"
         />
       </div>
       <button

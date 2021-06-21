@@ -10,10 +10,11 @@ export const ProductList = () => {
   const [listOfProducts, setListOfProducts] = useState([]);
   const [query, setQuery] = useState('');
   const [modalActive, setModalActive] = useState(false);
+  const [checkboxStatus, setCheckboxStatus] = useState(true);
 
   useEffect(() => {
     setListOfProducts(products)
-  }, [])
+  }, []);
 
   const removeProduct = (id) => (
     setListOfProducts(state => state.filter(product => product.id !== id)
@@ -26,11 +27,23 @@ export const ProductList = () => {
     setListOfProducts(products => (
       [...products, product]
     ))
-  }
+  };
 
   return (
     <>
       <div className="container__search">
+        <label htmlFor="checkbox">
+          <input
+            id="checkbox"
+            className="search__checkbox"
+            type="checkbox"
+            checked={checkboxStatus}
+            onChange={({target: { checked }}) => {
+              setCheckboxStatus(checked)
+            }}
+          />
+          Show all
+        </label>
         <input
           type="text"
           className="search__input"
@@ -60,6 +73,7 @@ export const ProductList = () => {
               key={product.id}
               {...product}
               onRemove={removeProduct}
+              countStatus={checkboxStatus}
             />
           ))
         )}

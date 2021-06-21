@@ -5,6 +5,10 @@
 
   border: 1px solid black;
   background-color: white;
+
+  &--noCount {
+    background-color: gray;
+  }
 }
 
 .show {
@@ -53,6 +57,13 @@
     width: 200px;
   }
 
+  &__count {
+    position: absolute;
+    color: red;
+    top: 235px;
+    font-weight: bold;
+    font-size: 18px;
+  }
 
   &__title {
     width: 100%;
