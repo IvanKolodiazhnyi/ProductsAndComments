@@ -1,10 +1,13 @@
 import React from 'react';
 
-function App() {
+import { ProductList } from './Components/ProductList';
+import './App.scss';
 
+function App() {
+  
   return (
     <div className="App">
-      some text
+      <ProductList />
     </div>
   );
 }
